@@ -1,16 +1,14 @@
+import Header from './header';
+import Movie from './movie';
+import {Menu} from './header/menu/menu';
+// import {WrapperContainer} from './wrapper/wrapper.styled'
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <Header />
+      <Menu/>
+      <Movie />
+    </>
   );
 };
