@@ -1,13 +1,13 @@
 import { BsFilm } from 'react-icons/bs';
 
-import { MainMenu, Logo, LogoIcon, Nav, NavList, NavItem } from './menu.styled';
+import { MainMenu, Logo, LogoIcon, LogoName, Nav, NavList, NavItem } from './menu.styled';
 
 export function Menu() {
   return (
     <MainMenu>
       <Logo>
         <LogoIcon>
-        <BsFilm />
+        <BsFilm />{' '} <LogoName>Filmoteka</LogoName>
         </LogoIcon>
       </Logo>
       <Nav>

@@ -10,10 +10,6 @@ export const Logo = styled.a`
   cursor: pointer;
   margin-block: ${p => p.theme.space[10]};
 
-  &:hover {
-    color: ${p => p.theme.colors.accent};
-    transition: 0.3s ease-out;
-  };
 `;
 
 export const LogoIcon = styled.span`
@@ -28,6 +24,20 @@ export const LogoIcon = styled.span`
     color: ${p => p.theme.colors.accent};
     transition: ${p => p.theme.transition.normal};
   }
+`;
+
+export const LogoName = styled.span`
+font-family: Roboto;
+font-size: ${p=>p.theme.fontSizes.l};
+font-weight: ${p=>p.theme.fontWeights.bold};
+
+text-align: center;
+color:${p=>p.theme.colors.white};
+
+&:hover {
+  color:${p=>p.theme.colors.accent};
+  transition: ${p => p.theme.transition.normal};
+}
 `;
 
 export const Nav = styled.nav`
