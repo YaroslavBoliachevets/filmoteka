@@ -1,9 +1,25 @@
-function Movie() {
+import { makeReleaseDate, makeGenres, makeMovieTitle, makePoster} from '../api/api';
+import { Card, Img, Title, AdditionalInfo } from "./movie.styled";
+
+
+function Movies({findMovies}) {
 	return (<>
-	<img width={395} alt="movie's poster"/>
-	<h1>Movie's name</h1>
-	<p>Movie's ganres | movie's year</p>
+	{findMovies &&
+          findMovies.map(movie => (
+            <Card key={movie.id}>
+              <Img
+                src={makePoster(movie)}
+                alt={'poster' + makeMovieTitle(movie)}
+              />
+
+              <Title>{makeMovieTitle(movie)}</Title>
+			  
+              <AdditionalInfo>
+                {makeGenres(movie)} {''}| {makeReleaseDate(movie)}
+              </AdditionalInfo>
+            </Card>
+          ))}
 	</>)
 };
 
-export default Movie
+export default Movies;

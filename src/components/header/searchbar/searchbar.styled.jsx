@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 export const Searcher = styled.div`
-  display: flex;
-  justify-content: center;
+display:flex;
+justify-content:center;
+`;
+
+export const Wrapper = styled.div`
+width: ${p => p.theme.sizes.all};
+max-width: ${p => p.theme.sizes.m};
+
 `;
 
 export const SearchForm = styled.form`
   display: flex;
-  width: ${p => p.theme.sizes.all};
-  max-width: ${p => p.theme.sizes.m};
+
 `;
 
 export const InputQuery = styled.input`
@@ -56,4 +61,10 @@ export const SearcherIcon = styled.span`
     color: ${p => p.theme.colors.accent};
     transition: ${p => p.theme.transition.normal};
   }
+`;
+
+export const Error = styled.p`
+color:red;
+position:absolute;
+
 `;

@@ -5,12 +5,12 @@ import {
   HeaderSection,
 } from './header.styled';
 
-function Header() {
+function Header({updateMovies}) {
   return (
     <HeaderSection>
       <WrapperContainer>
         <Menu/>
-        <Searchbar/>
+        <Searchbar updateMovies={updateMovies}/>
       </WrapperContainer>
     </HeaderSection>
   );

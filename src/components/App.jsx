@@ -1,13 +1,18 @@
 import Header from './header';
-// import Movie from './movie';
-// import {Menu} from './header/menu/menu';
+import { useState } from 'react';
 import Gallery from './gallery';
 
 export const App = () => {
+  const [findMovies, setfindMovies] = useState([]);
+
+  // const updatefindMovies = (userfindMovies) => {
+  //   setfindMovies(userfindMovies);
+  // }
+
   return (
     <>
-      <Header />
-      <Gallery/>
+      <Header updateMovies={setfindMovies} />
+      <Gallery findMovies={findMovies} updateMovies={setfindMovies} />
     </>
   );
 };
