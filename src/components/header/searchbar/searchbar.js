@@ -13,31 +13,31 @@ import {
 } from './searchbar.styled';
 import { fetchMovies } from '../../api/api';
 
-export function Searchbar({ updateMovies }) {
+export function Searchbar({ updateMovies, updateTotalPages, setCurrentPage }) {
   const [query, setQuery] = useState('');
   const [error, setError] = useState(false);
 
   const onSubmit = e => {
     e.preventDefault();
-
+    setCurrentPage(1);
     fetchMovies(query).then(({ data }) => {
-      console.log( 'data.results', data);
+      // console.log( 'data.results', data, data.total_pages);
       if (isFindMovie(data.results)) {
         setError(false);
         updateMovies(data.results);
+        updateTotalPages(data.total_pages);
       } else setError(true);
-      console.log(error);
+      // console.log(error);
     });
 
     const isFindMovie = movies => {
       if (movies.length !== 0) {
         return true;
-        console.log('что-то есть');
       }
       return false;
-      console.log('ничего нет');
     };
   };
+
   const onChange = e => {
     setQuery(e.target.value);
   };

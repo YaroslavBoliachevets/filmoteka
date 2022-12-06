@@ -12,15 +12,15 @@ const KEY = '5692dca6012d3660a336300872bd664c';
 export const imageNotFound =
 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930';
 
- export const fetchTrendingMovies = async () => {
+ export const fetchTrendingMovies = async (page) => {
     const responce = await axios.get(
-      `3/trending/all/day?api_key=${KEY}`
+      `3/trending/all/day?api_key=${KEY}&page=${page}`
     );
     return responce;
   };
 
-  export const fetchMovies = async (query) => {
-	const responce = await axios.get(`3/search/movie?api_key=${KEY}&query=${query}`);
+  export const fetchMovies = async (query, page=1) => {
+	const responce = await axios.get(`3/search/movie?api_key=${KEY}&query=${query}&page=${page}`);
 	
 	return responce;
   };
@@ -36,7 +36,7 @@ export const imageNotFound =
 		return movieTitle;
 	  };
 	
-	  export const makeGenres = ({ genre_ids }) => {
+	  export const makeGenres = ({ genre_ids=[] }) => {
 		const genresArray = [];
 	
 		for (let id of genre_ids) {
@@ -52,6 +52,7 @@ export const imageNotFound =
 		  genresArray.push(genres[index].name);
 		}
 	
+		if (genresArray.length === 0) {return 'no genres info'}
 		return Object.values(genresArray).join(', ');
 	  };
 	
@@ -60,7 +61,7 @@ export const imageNotFound =
 		  ? format(new Date(release_date), 'y')
 		  : first_air_date
 		  ? format(new Date(first_air_date), 'y')
-		  : 'no info';
+		  : 'no release date info';
 		return releaseDate;
 	  };
 
