@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import { makeReleaseDate, makeGenres, makeMovieTitle, makePoster} from '../api/api';
 import { Card, Img, Title, AdditionalInfo } from "./movie.styled";
 

@@ -1,6 +1,6 @@
 import { BsSearch } from 'react-icons/bs';
 
-import { useState } from 'react';
+import { useState, } from 'react';
 
 import {
   SearcherIcon,
@@ -11,36 +11,29 @@ import {
   Button,
   Error,
 } from './searchbar.styled';
-import { fetchMovies } from '../../api/api';
 
-export function Searchbar({ updateMovies, updateTotalPages, setCurrentPage }) {
-  const [query, setQuery] = useState('');
-  const [error, setError] = useState(false);
+export function Searchbar({ setQuery, setCurrentPage, error }) {
+  const [searchbarQuery, setSearchbarQuery] = useState('');
 
   const onSubmit = e => {
     e.preventDefault();
-    setCurrentPage(1);
-    fetchMovies(query).then(({ data }) => {
-      // console.log( 'data.results', data, data.total_pages);
-      if (isFindMovie(data.results)) {
-        setError(false);
-        updateMovies(data.results);
-        updateTotalPages(data.total_pages);
-      } else setError(true);
-      // console.log(error);
-    });
 
-    const isFindMovie = movies => {
-      if (movies.length !== 0) {
-        return true;
-      }
-      return false;
-    };
+    if (isQueryEmpty(searchbarQuery)) return;
+
+    setCurrentPage(1);
+    setQuery(searchbarQuery?.trim().toLocaleLowerCase());
+    setSearchbarQuery('');
   };
 
   const onChange = e => {
-    setQuery(e.target.value);
+    setSearchbarQuery(e.target.value);
   };
+
+  const isQueryEmpty = query => {
+    if (query.trim() === '') return true;
+    return false;
+  };
+
   return (
     <Searcher>
       <Wrapper>
@@ -49,6 +42,7 @@ export function Searchbar({ updateMovies, updateTotalPages, setCurrentPage }) {
             type="text"
             placeholder="Movie search"
             onChange={onChange}
+            value={searchbarQuery}
           ></InputQuery>
           <Button type="submit">
             <SearcherIcon>
@@ -56,8 +50,8 @@ export function Searchbar({ updateMovies, updateTotalPages, setCurrentPage }) {
             </SearcherIcon>
           </Button>
         </SearchForm>
-        {error && <Error>Enter the correct movie name. </Error>}
       </Wrapper>
+      {error && <Error>Search result not successful. Enter the correct movie name.</Error>}
     </Searcher>
   );
 }

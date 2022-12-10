@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const Card = styled.li`
 max-width:275px;
@@ -11,7 +11,7 @@ cursor:pointer;
 }
 `;
 
-export const Img = styled.img`
+export const Img = styled(LazyLoadImage)`
 width: 274px;
 border-radius: ${p => p.theme.radii.s};
 `;

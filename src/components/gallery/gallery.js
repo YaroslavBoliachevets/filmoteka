@@ -6,11 +6,7 @@ import { List, } from './gallery.styled';
 
 
 
-export default function Gallery({findMovies, updateMovies, currentPage}) {
-
-
-
-  
+export default function Gallery({findMovies,}) {
   return (
     <WrapperContainer>
       <List>

@@ -46,6 +46,7 @@ export const theme = {
 	  s: "14px",
 	  m: "20px",
 	  l: "32px",
+	  xl: "40px",
 	},
   
 	shadow: {

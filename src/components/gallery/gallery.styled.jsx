@@ -7,10 +7,9 @@ flex-wrap:wrap;
 list-style:none;
 max-width:1000px;
 
-margin:auto;
+margin: 24px auto;
 padding:0px;
-padding-top:${p=>p.theme.space[6]}px;
-padding-bottom:${p=>p.theme.space[6]}px;
+
 gap:${p=>p.theme.space[6]}px;
 `;
 

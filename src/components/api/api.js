@@ -12,7 +12,7 @@ const KEY = '5692dca6012d3660a336300872bd664c';
 export const imageNotFound =
 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930';
 
- export const fetchTrendingMovies = async (page) => {
+ export const fetchTrendingMovies = async (page=1) => {
     const responce = await axios.get(
       `3/trending/all/day?api_key=${KEY}&page=${page}`
     );

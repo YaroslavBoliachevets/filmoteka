@@ -66,5 +66,5 @@ export const SearcherIcon = styled.span`
 export const Error = styled.p`
 color:red;
 position:absolute;
-
+top:150px;
 `;
