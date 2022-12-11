@@ -1,10 +1,11 @@
 import Header from './header';
-import { useState, useEffect, } from 'react';
+import { useState, useEffect } from 'react';
 import Gallery from './gallery';
 import Pagination from './pagination/pagination';
 import Loader from './loader';
+import MovieInfo from './movieInfo';
 
-import { fetchTrendingMovies, fetchMovies } from './api/api';
+import { fetchTrendingMovies, fetchMovies, fetchMovieDetailInfo } from './api/api';
 
 export const App = () => {
   const [findMovies, setfindMovies] = useState([]);
@@ -13,17 +14,20 @@ export const App = () => {
   const [query, setQuery] = useState('');
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
+  const [isModalMovieOpen, setIsModalMovieOpen] = useState(false);
+  const [modalMovieId, setModalMovieId] = useState(null);
+  const [modalDetailMovieInfo, setModalDetailMovieInfo] = useState({});
+
 
   useEffect(() => {
     handleUp();
     setLoader(true);
     if (query === '') {
-      fetchTrendingMovies(currentPage)
-        .then(({ data }) => {
-          setLoader(false);
-          setfindMovies(data.results);
-          setTotalPages(data.total_pages);
-        });
+      fetchTrendingMovies(currentPage).then(({ data }) => {
+        setLoader(false);
+        setfindMovies(data.results);
+        setTotalPages(data.total_pages);
+      });
     }
 
     if (query !== '') {
@@ -45,10 +49,18 @@ export const App = () => {
         });
     }
 
-    if (currentPage > 1 ) {
+    if (currentPage > 1) {
       setError(false);
     }
   }, [query, currentPage]);
+
+  useEffect(()=>{
+    if (modalMovieId === null) return;
+    fetchMovieDetailInfo(modalMovieId).then(({data}) => {
+      console.log("data", data);
+      setModalDetailMovieInfo(data)});
+
+  }, [modalMovieId])
 
   const isGetMovies = data => {
     if (data?.results.length > 0) {
@@ -58,8 +70,8 @@ export const App = () => {
   };
 
   const handleUp = () => {
-    window.scrollTo(0,0);
-  }
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -70,12 +82,16 @@ export const App = () => {
         error={error}
       />
       <Loader loadStatus={loader} />
-      <Gallery findMovies={findMovies} />
+      <Gallery setIsModalMovieOpen={setIsModalMovieOpen}
+      setModalMovieId={setModalMovieId} findMovies={findMovies} />
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
+      {isModalMovieOpen && <MovieInfo setIsModalMovieOpen={setIsModalMovieOpen}
+      modalMovieId={modalMovieId} 
+      movie={modalDetailMovieInfo}/>}
     </>
   );
 };

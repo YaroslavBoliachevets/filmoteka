@@ -20,10 +20,10 @@ export const LogoIcon = styled.span`
   font-size: ${p => p.theme.fontSizes.l};
   color: ${p => p.theme.colors.white};
 
-  &:hover {
+  & :hover {
     color: ${p => p.theme.colors.accent};
     transition: ${p => p.theme.transition.normal};
-  }
+
 `;
 
 export const LogoName = styled.span`
@@ -34,10 +34,7 @@ font-weight: ${p=>p.theme.fontWeights.bold};
 text-align: center;
 color:${p=>p.theme.colors.white};
 
-&:hover {
-  color:${p=>p.theme.colors.accent};
-  transition: ${p => p.theme.transition.normal};
-}
+
 `;
 
 export const Nav = styled.nav`

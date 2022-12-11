@@ -1,16 +1,14 @@
-import {  useEffect } from 'react';
-
 import { WrapperContainer } from '../wrapper/wrapper.styled';
 import Movies  from 'components/movie';
 import { List, } from './gallery.styled';
 
 
 
-export default function Gallery({findMovies,}) {
+export default function Gallery({findMovies, setIsModalMovieOpen, setModalMovieId}) {
   return (
     <WrapperContainer>
       <List>
-      <Movies findMovies={findMovies}/>
+      <Movies findMovies={findMovies} setIsModalMovieOpen={setIsModalMovieOpen} setModalMovieId={setModalMovieId}/>
       </List>
     </WrapperContainer>
   );
