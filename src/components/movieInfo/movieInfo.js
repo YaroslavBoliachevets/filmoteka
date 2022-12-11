@@ -5,7 +5,6 @@ import {
   BtnWrapper,
   Img,
   CloseBtn,
-  AdditionalInfo,
   AboutTitle,
   AboutText,
   Title,
@@ -20,9 +19,7 @@ import {
   makePoster,
   makeMovieTitle,
   makeAllGenresList,
-  makeNumber,
 } from '../api/api';
-import Movies from 'components/movie/movie';
 
 function MovieInfo({ setIsModalMovieOpen, movie }) {
   useEffect(() => {
