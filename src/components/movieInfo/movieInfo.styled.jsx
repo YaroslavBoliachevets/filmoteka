@@ -35,7 +35,7 @@ export const ModalContent = styled.div`
 
   @media (max-width: 767px) {
     width: 280px;
-    height: 60%;
+    height: 80%;
     overflow-y: scroll;
     justify-content: center;
   }
