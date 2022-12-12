@@ -1,11 +1,23 @@
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+// import { BsWindow } from 'react-icons/bs';
 
 import { List, Button, CurrentButton } from './pagination.styled';
 
 function Pagination({ totalPages, currentPage, setCurrentPage }) {
   const LEFT_PAGE = 'LEFT';
   const RIGHT_PAGE = 'RIGHT';
-  const pageNeighbours = 2;
+  let pageNeighbours = 2;
+
+const mobileViewport = window.matchMedia("(max-width:767px)");
+
+const changeNeighbours = (mobileViewport) => {
+  if (mobileViewport.matches) {
+    pageNeighbours = 1;
+  }
+
+}
+
+changeNeighbours(mobileViewport);
 
   const range = (from, to, step = 1) => {
     let i = from;

@@ -3,12 +3,22 @@ import styled from "styled-components";
 export const List = styled.ul`
 display:flex;
 list-style:none;
-gap:15px;
 justify-content:center;
+padding:0;
+
+gap:15px;
+@media screen and (max-width:450px) {
+	gap:7px;
+}
+
 `;
 
 export const Button = styled.button`
 padding:15px 20px;
+
+@media screen and (max-width:419px) {
+	padding:10px 13px;
+}
 border-radius:5px;
 border:0;
 cursor:pointer;
@@ -29,6 +39,10 @@ text-align: left;
 
 export const CurrentButton =styled.button`
 padding:15px 20px;
+@media screen and (max-width:419px) {
+	padding:10px 13px;
+}
+
 border-radius:5px;
 border:0;
 cursor:pointer;
