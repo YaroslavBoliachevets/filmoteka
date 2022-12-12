@@ -41,14 +41,15 @@ function MovieInfo({ setIsModalMovieOpen, movie }) {
     <>
       <ModalBackground onClick={() => setIsModalMovieOpen(false)}>
         <ModalContent onClick={e => e.stopPropagation()}>
-          <Img src={makePoster(movie)} alt="#" />
-          <CloseBtn
+        <CloseBtn
             onClick={() => {
               onClickBtnClose();
             }}
           >
             X
           </CloseBtn>
+          <Img src={makePoster(movie)} alt="#" />
+
 
           <MovieInformationWrapper>
             <Title>{makeMovieTitle(movie)}</Title>
