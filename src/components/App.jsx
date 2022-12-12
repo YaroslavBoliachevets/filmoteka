@@ -17,6 +17,7 @@ export const App = () => {
   const [isModalMovieOpen, setIsModalMovieOpen] = useState(false);
   const [modalMovieId, setModalMovieId] = useState(null);
   const [modalDetailMovieInfo, setModalDetailMovieInfo] = useState({});
+  // const [watchedMovies, setWatchedMovies] = useState([]);
 
 
   useEffect(() => {
