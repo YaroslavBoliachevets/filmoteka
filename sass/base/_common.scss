@@ -1,0 +1,13 @@
+*{
+	scroll-behavior: smooth;
+	}
+	
+	a {
+	
+	  &:hover,
+	  &:focus {
+		color: var(--text-accent);
+		transition: color 300ms linear;
+		transition: color 300ms linear;
+	  }
+	  }
