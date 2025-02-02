@@ -1,3 +1,9 @@
-* {
-	background-color: rgb(130, 144, 160);
-}
+
+@use './sass/base/common';
+@use './sass/base/resets';
+
+@use './sass/components/container';
+@use './sass/components/titles';
+
+@use './sass/layout/header';
+@use './sass/layout/movies-container';

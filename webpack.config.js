@@ -17,7 +17,24 @@ module.exports = {
         use: [
           {
             loader: 'html-loader', // Загружает HTML как строку
+            options: {
+              sources: {
+                list: [
+                  {
+                    tag: 'use',
+                    attribute: 'href',
+                    type: 'src', // Позволяет обрабатывать <use> в SVG
+                  },
+                  {
+                    tag: 'img',
+                    attribute: 'src',
+                    type: 'src',
+                  },
+                ],
+              },
+            },
           },
+          
           {
             loader: 'posthtml-loader', // Применяет PostHTML плагины
           },
@@ -35,9 +52,21 @@ module.exports = {
         ],
       },
 
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+       // Обработка изображений
+       {
+        test: /\.(png|jpg|jpeg)$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'assets/images/[name][ext]',
+        },
+      },
+      // Для обработки SVG
+      {
+        test: /\.svg$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/icons/[name][ext]', // Логотипы и иконки в отдельной папке
+        },
       },
     ],
   },
@@ -57,6 +86,18 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html', // путь к index.html
+      inject: 'body',
+      minify: false, // Отключение минимизации для проверки путей
     }),
   ],
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 };
+
+
+
+console.log('Обрабатываемый файл:', path.resolve(__dirname, 'src/img/movie-tmpl.png'));

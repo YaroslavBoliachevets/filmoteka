@@ -1,0 +1,28 @@
+.movies {
+	padding: 20px;
+}
+
+// w280h402
+.movie-card {
+	cursor: pointer;
+	min-width: 280px;
+	margin-bottom: 20px;
+}
+
+.movie-img {
+	max-width: 280px;
+	border-radius: 5px;
+}
+
+.movie-description {
+	margin-top: 10px;
+}
+
+.movie-name {
+	text-transform: uppercase;
+}
+
+.movie-genre {
+	text-transform: capitalize;
+	color: rgb(255, 107, 8);
+}

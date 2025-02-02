@@ -1,0 +1,17 @@
+* {
+  scroll-behavior: smooth;
+}
+
+a {
+  &:hover,
+  &:focus {
+    color: var(--text-accent);
+    transition: color 300ms linear;
+    transition: color 300ms linear;
+  }
+}
+
+p {
+  font-weight: 500;
+  font-size: 12px;
+}
