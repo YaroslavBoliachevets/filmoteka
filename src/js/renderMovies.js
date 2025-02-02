@@ -1,13 +1,4 @@
-import { genresList } from './genresList';
-
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjkyZGNhNjAxMmQzNjYwYTMzNjMwMDg3MmJkNjY0YyIsIm5iZiI6MTY1NzgwMTc3Ni4xMjQsInN1YiI6IjYyZDAwYzMwZDVmZmNiMDA0YzEyNDg1ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HGMfaAikgHYhSiMqYuSvkAmCngKACueL-bCBj8drZOo',
-  },
-};
+import { options, genresList } from './api';
 
 const fetchPopularMovies = async function () {
   try {
@@ -31,7 +22,6 @@ function renderMovies(movies) {
   }
 
   container.innerHTML = '';
-//   console.log('movies', movies);
   movies.forEach(({ poster_path, title, genre_ids, release_date }) => {
     const genres = findGenres(genre_ids);
     const release = release_date.slice(0, 4);
@@ -64,3 +54,5 @@ fetchPopularMovies().then((movies) => {
     renderMovies(movies);
   }
 });
+
+export {renderMovies, fetchPopularMovies};
