@@ -1,4 +1,6 @@
 const path = require('path');
+const fs = require('fs');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -6,10 +8,11 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '',
     clean: true,
   },
   mode: 'development',
-
+  mode: 'production',
   module: {
     rules: [
       {
@@ -89,6 +92,15 @@ module.exports = {
       inject: 'body',
       minify: false, // Отключение минимизации для проверки путей
     }),
+
+    {
+      apply: (compiler) => {
+        compiler.hooks.afterEmit.tap('CreateNoJekyll', (compilation) => {
+          const outputPath = compiler.options.output.path; // Путь к папке `dist`
+          fs.writeFileSync(path.resolve(outputPath, '.nojekyll'), ''); // Создает пустой файл `.nojekyll`
+        });
+      },
+    },
   ],
 
   resolve: {
