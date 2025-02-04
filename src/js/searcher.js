@@ -1,7 +1,6 @@
 import { options } from './api';
 import { renderMovies } from './renderMovies';
 import { fetchPopularMovies } from './fetchPopularMovies';
-import { openModal } from './modal';
 
 const searchFrom = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
@@ -49,6 +48,7 @@ searchFrom.addEventListener('submit', (e) => {
 
 const fetchMovieById = async function (id) {
   try {
+    
     const responceId = await fetch(
       `https://api.themoviedb.org/3/movie/${id}/external_ids`,
       options,
@@ -60,8 +60,8 @@ const fetchMovieById = async function (id) {
       options,
     );
     const data = await responceData.json();
-
-    openModal();
+return data
+    
   } catch (err) {
     console.error('Error:', err);
   }

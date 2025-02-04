@@ -2,6 +2,7 @@ import { options, genresList } from './api';
 import { openModal } from './modal';
 import { fetchMovieById } from './searcher';
 
+
 function renderMovies(movies) {
   const container = document.querySelector('.movies');
 
@@ -26,9 +27,8 @@ function renderMovies(movies) {
       </div>
     `;
 
-    movieCard.addEventListener('click', () => {
-      fetchMovieById(id);
-    });
+    movieCard.addEventListener('click', ()=> {handleMovieClick(id)}
+    );
 
     container.appendChild(movieCard);
   });
@@ -45,4 +45,16 @@ function findGenres(genresId) {
   return genres[0] + ', ' + genres[1] + ', ' + genres[2] + ' ...';
 }
 
-export { renderMovies };
+async function handleMovieClick(id) {
+
+  try {
+    const movie = await fetchMovieById(id);
+    console.log('handleMovieClick movie', movie);
+    
+    openModal(movie);
+  } catch(err) {
+    console.error('Error:', err);
+  }
+  
+}
+export { renderMovies, findGenres };
