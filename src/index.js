@@ -9,4 +9,5 @@ import "./style.scss";
 import './js/searcher';
 // import './js/api';
 import './js/renderMovies';
+import './js/openMovieCard';
 

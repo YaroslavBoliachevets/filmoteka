@@ -1,4 +1,5 @@
 import { options, genresList } from './api';
+import { openModal } from './modal';
 
 const fetchPopularMovies = async function () {
   try {
@@ -22,17 +23,24 @@ function renderMovies(movies) {
   }
 
   container.innerHTML = '';
-  movies.forEach(({ poster_path, title, genre_ids, release_date }) => {
+  movies.forEach(({ poster_path, title, genre_ids, release_date, id }) => {
     const genres = findGenres(genre_ids);
     const release = release_date.slice(0, 4);
-    const movieCard = `<div class="movie-card">
+
+    const movieCard = document.createElement('div');
+    movieCard.classList.add('movie-card');
+
+    movieCard.innerHTML = `
       <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${title}" />
       <div class="movie-description">
         <p class="movie-name">${title}</p>
         <p class="movie-genre">${genres} | ${release}</p>
       </div>
-    </div>`;
-    container.insertAdjacentHTML('beforeend', movieCard);
+    `;
+
+    movieCard.addEventListener('click', () => {fetchMovieById(id)});
+
+    container.appendChild(movieCard);
   });
 }
 
@@ -52,5 +60,23 @@ fetchPopularMovies().then((movies) => {
     renderMovies(movies);
   }
 });
+
+const fetchMovieById = async function(id) {
+try {
+  
+
+ const responceId = await fetch(`https://api.themoviedb.org/3/movie/${id}/external_ids`, options);
+ const dataId = await responceId.json();
+
+ const responceData = await fetch(`https://api.themoviedb.org/3/find/${dataId.imdb_id}?external_source=imdb_id`, options);
+ const data = await responceData.json();
+
+ openModal();
+} catch(err) {
+  console.error("Error:", err);
+}
+}
+
+
 
 export { renderMovies, fetchPopularMovies };
