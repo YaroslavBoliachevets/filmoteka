@@ -1,18 +1,6 @@
 import { options, genresList } from './api';
 import { openModal } from './modal';
-
-const fetchPopularMovies = async function () {
-  try {
-    const response = await fetch(
-      'https://api.themoviedb.org/3/movie/popular',
-      options,
-    );
-    const data = await response.json();
-    return data.results;
-  } catch (err) {
-    console.error('Error:', err);
-  }
-};
+import { fetchMovieById } from './searcher';
 
 function renderMovies(movies) {
   const container = document.querySelector('.movies');
@@ -38,7 +26,9 @@ function renderMovies(movies) {
       </div>
     `;
 
-    movieCard.addEventListener('click', () => {fetchMovieById(id)});
+    movieCard.addEventListener('click', () => {
+      fetchMovieById(id);
+    });
 
     container.appendChild(movieCard);
   });
@@ -55,28 +45,4 @@ function findGenres(genresId) {
   return genres[0] + ', ' + genres[1] + ', ' + genres[2] + ' ...';
 }
 
-fetchPopularMovies().then((movies) => {
-  if (movies) {
-    renderMovies(movies);
-  }
-});
-
-const fetchMovieById = async function(id) {
-try {
-  
-
- const responceId = await fetch(`https://api.themoviedb.org/3/movie/${id}/external_ids`, options);
- const dataId = await responceId.json();
-
- const responceData = await fetch(`https://api.themoviedb.org/3/find/${dataId.imdb_id}?external_source=imdb_id`, options);
- const data = await responceData.json();
-
- openModal();
-} catch(err) {
-  console.error("Error:", err);
-}
-}
-
-
-
-export { renderMovies, fetchPopularMovies };
+export { renderMovies };

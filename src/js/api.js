@@ -34,3 +34,24 @@ const genresList = [
 const KEY = '5692dca6012d3660a336300872bd664c';
 
 export { options, genresList };
+
+
+const fetchMovieById = async function (id) {
+  try {
+    const responceId = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/external_ids`,
+      options,
+    );
+    const dataId = await responceId.json();
+
+    const responceData = await fetch(
+      `https://api.themoviedb.org/3/find/${dataId.imdb_id}?external_source=imdb_id`,
+      options,
+    );
+    const data = await responceData.json();
+
+    openModal();
+  } catch (err) {
+    console.error('Error:', err);
+  }
+};
