@@ -8,11 +8,11 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: './',
+    publicPath: '/',
     clean: true,
   },
   mode: 'development',
-  mode: 'production',
+
   module: {
     rules: [
       {
@@ -37,7 +37,7 @@ module.exports = {
               },
             },
           },
-          
+
           {
             loader: 'posthtml-loader', // Применяет PostHTML плагины
           },
@@ -55,8 +55,8 @@ module.exports = {
         ],
       },
 
-       // Обработка изображений
-       {
+      // Обработка изображений
+      {
         test: /\.(png|jpg|jpeg)$/i,
         type: 'asset/resource',
         generator: {
@@ -81,7 +81,7 @@ module.exports = {
     compress: true,
     port: 3000,
     open: true,
-    hot: true, // Включает горячую замену модулей (HMR)
+    // hot: true, // Включает горячую замену модулей (HMR)
     liveReload: true, // Автоматически перезагружает страницу при изменении
     watchFiles: ['./src/**/*'], // Следит за файлами в папке src
   },
@@ -110,6 +110,7 @@ module.exports = {
   },
 };
 
-
-
-console.log('Обрабатываемый файл:', path.resolve(__dirname, 'src/img/movie-tmpl.png'));
+console.log(
+  'Обрабатываемый файл:',
+  path.resolve(__dirname, 'src/img/movie-tmpl.png'),
+);

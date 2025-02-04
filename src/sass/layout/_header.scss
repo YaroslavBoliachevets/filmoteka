@@ -33,23 +33,66 @@
 .search {
 	box-sizing: border-box;
 	width: 100%;
+	
 
+	&-form {
+		display: flex;
+		padding-bottom: 5px;
+	}
 
 	&-input {
-		width: 280px;
+		width: 230px;
+		margin-right: 5px;
+		padding: 5px;
 		background-color: transparent;
 		border: 0px;
-		border-bottom: 1px solid grey;
+		border: 1px solid  rgba(128, 128, 128, 0.536);
 		position: relative;
+
+		color: rgb(160, 158, 158);
+
+		&:hover, &:focus {
+			outline: none;
+		border-color:grey;
+		}
+
+		&::placeholder {
+			// color: gray;
+			color:  rgba(128, 128, 128, 0.536);
+  font-style: italic;
+  font-size: 14px;
+		}
+		&:focus::placeholder, &:hover::placeholder {
+			color:  grey;
+		}
 	}
 
 	&-input--svg {
+		fill: red;
 		position: relative;
 		width: 10px;
 		height: 10px;
 		top: -14px;
 		left: 270px;
 	}
+
+	&-button {
+		width: 70px;
+		text-transform: capitalize;
+		background-color:  rgba(128, 128, 128, 0.536);
+		border: 0px;
+		cursor: pointer;
+		color: rgb(182, 180, 180);
+		outline: none;
+
+		&:hover {
+			background-color:  grey;
+			color: rgb(239, 239, 239);
+		}
+	}
 }
 
-
+.warning {
+	color: red;
+	
+}

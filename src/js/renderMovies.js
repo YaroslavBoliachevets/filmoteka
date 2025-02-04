@@ -25,15 +25,13 @@ function renderMovies(movies) {
   movies.forEach(({ poster_path, title, genre_ids, release_date }) => {
     const genres = findGenres(genre_ids);
     const release = release_date.slice(0, 4);
-    const movieCard = `
-  		<div class="movie-card">
+    const movieCard = `<div class="movie-card">
       <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${title}" />
       <div class="movie-description">
         <p class="movie-name">${title}</p>
         <p class="movie-genre">${genres} | ${release}</p>
       </div>
-    </div>
-  		`;
+    </div>`;
     container.insertAdjacentHTML('beforeend', movieCard);
   });
 }
@@ -55,4 +53,4 @@ fetchPopularMovies().then((movies) => {
   }
 });
 
-export {renderMovies, fetchPopularMovies};
+export { renderMovies, fetchPopularMovies };
