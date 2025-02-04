@@ -5,15 +5,16 @@ import { fetchPopularMovies } from './fetchPopularMovies';
 const searchFrom = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
 
-const fetchMoviesByQuery = async function (query) {
+const fetchMoviesByQuery = async function (query, page=1) {
   if (!query.trim()) return;
+console.log('page', page);
 
   const warningElement = document.querySelector('.warning');
   warningElement.textContent = '';
 
   try {
     const responce = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`,
       options,
     );
 

@@ -8,7 +8,8 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/filmoteka/',
+    publicPath: '/',
+    // publicPath: '/filmoteka/',
     clean: true,
   },
   mode: 'development',
@@ -90,7 +91,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html', // путь к index.html
       filename: 'index.html',
-      publicPath: '/filmoteka/', // Укажите корректный путь
+      // publicPath: '/filmoteka/', 
+      publicPath: '/', 
       inject: 'body',
       minify: false, // Отключение минимизации для проверки путей
     }),

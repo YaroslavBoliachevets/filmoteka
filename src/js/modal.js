@@ -51,7 +51,7 @@ function renderMovieDescr(movie) {
     poster_path, video
   } = movie[0];
 
-    console.log('video', video);
+
   const modalBack = document.querySelector('.modal--background');
   
   modalBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${backdrop_path}')`;

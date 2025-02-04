@@ -76,6 +76,11 @@
     text-transform: capitalize;
   }
 
+  &--value {
+	width: 200px;
+	text-align: right;
+  }
+
   &--value--accent {
     background-color: rgb(255, 107, 1);
     border-radius: 5px;

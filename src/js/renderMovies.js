@@ -3,7 +3,7 @@ import { openModal } from './modal';
 import { fetchMovieById } from './searcher';
 
 
-function renderMovies(movies) {
+function renderMovies({results:movies, page, total_pages}) {
   const container = document.querySelector('.movies');
 
   if (!container) {
@@ -49,7 +49,6 @@ async function handleMovieClick(id) {
 
   try {
     const movie = await fetchMovieById(id);
-    console.log('handleMovieClick movie', movie);
     
     openModal(movie);
   } catch(err) {
