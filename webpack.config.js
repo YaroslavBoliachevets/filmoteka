@@ -91,8 +91,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html', // путь к index.html
       filename: 'index.html',
-      // publicPath: '/filmoteka/', 
-      publicPath: '/', 
+      publicPath: '/filmoteka/', 
+      // publicPath: '/', 
       inject: 'body',
       minify: false, // Отключение минимизации для проверки путей
     }),
