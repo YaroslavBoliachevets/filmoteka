@@ -1,47 +1,47 @@
-import { fetchPopularMovies } from "./fetchPopularMovies";
-import { renderMovies } from "./renderMovies";
+import { renderPopularMovies } from './fetchPopularMovies';
+import { renderQueryMovies } from './searcher';
 
+function renderPagination(page = 1, total_pages, query) {
 
-function renderPagination({page=1, total_pages}){
-	// const responce = fetch()
+  const pagination = document.querySelector('.pagination');
 
-
-	const pagination = document.querySelector('.pagination');
-
-	pagination.innerHTML = `<button class="prev" type="button">Prev</button>
-	<span class="page-info">${page} / ${total_pages}<span id="current-page">1</span></span>
+  pagination.innerHTML = `<button class="prev" type="button">Prev</button>
+	<span class="page-info">${page} / ${total_pages}<span id="current-page"></span></span>
 	<button class="next">Next</button>`;
 
-	const prevButton = document.querySelector('.prev');
-	const nextButton = document.querySelector('.next');
+  const prevButton = document.querySelector('.prev');
+  const nextButton = document.querySelector('.next');
 
-	if (page == 1) {prevButton.setAttribute('disabled', 'false');}
-	
-	nextButton.addEventListener('click', ()=> {
-		page+=1;
-
-		
-		fetchPopularMovies(page).then((data) => {
-			if (data) {
-			  renderMovies(data);
-			  renderPagination(data);
-			}
-		  });});
-
-		 
-	prevButton.addEventListener('click', ()=> {
-
-	if (page>1) {prevButton.removeAttribute('disabled')}
-		page-=1;
-		
-		fetchPopularMovies(page).then((data) => {
-			if (data) {
-			  renderMovies(data);
-			  renderPagination(data);
-			}
-		  });});
-
-
+  if (page == 1) {
+    prevButton.setAttribute('disabled', 'false');
   }
 
-export {renderPagination};
+  if (page == total_pages) {
+    nextButton.setAttribute('disabled', 'false');
+  }
+
+  nextButton.addEventListener('click', () => {
+	const nextPage = page + 1;
+	
+    if (query) {
+      renderQueryMovies(query, nextPage);
+    } else {
+      renderPopularMovies(nextPage);
+    }
+  });
+
+  prevButton.addEventListener('click', () => {
+    if (page > 1) {
+      prevButton.removeAttribute('disabled');
+    }
+    page -= 1;
+
+    if (query) {
+      renderQueryMovies(query, page);
+    } else {
+      renderPopularMovies(page);
+    }
+  });
+}
+
+export { renderPagination };

@@ -1,9 +1,9 @@
-import { options, genresList } from './api';
+import { genresList } from './api';
 import { openModal } from './modal';
 import { fetchMovieById } from './searcher';
 
 
-function renderMovies({results:movies, page, total_pages}) {
+function renderMovies({results:movies} ) {
   const container = document.querySelector('.movies');
 
   if (!container) {

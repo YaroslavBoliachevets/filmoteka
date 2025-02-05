@@ -9,7 +9,6 @@ const fetchPopularMovies = async function (page=1) {
 		options,
 	  );
 	  const data = await response.json();
-	//   console.log('data.results', data.results , data.page, data.total_pages);
 	  
 	  return data;
 	} catch (err) {
@@ -17,11 +16,19 @@ const fetchPopularMovies = async function (page=1) {
 	}
   };
 
-fetchPopularMovies().then((data) => {
-	if (data) {
-	  renderMovies(data);
-	  renderPagination(data);
-	}
-  });
+  function renderPopularMovies(page=1) {
+	fetchPopularMovies(page).then((data) => {
+		if (data) {
+			const {page, total_pages} =  data;
+		  renderMovies(data);
+		  
+		  renderPagination(page, total_pages);
+		}
 
-  export {fetchPopularMovies};
+	  });
+  } 
+
+
+renderPopularMovies();
+
+  export {fetchPopularMovies, renderPopularMovies};
