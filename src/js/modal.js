@@ -1,14 +1,13 @@
 import { genresList } from './api';
+import { switchMovieInLocalStorage, isMovieInStorage } from './localStorage';
 
 function openModal(movie) {
   document.body.style.overflow = 'hidden';
   const modal = document.querySelector('.modal');
   modal.style.display = 'flex';
-  
 
   window.addEventListener('click', outsideClick);
   window.addEventListener('keydown', handleEscClose);
-  
 
   renderMovieDescr(movie.movie_results);
 
@@ -37,6 +36,12 @@ function handleEscClose(e) {
   if (e.key === 'Escape' || e.key === 'Esc') closeModal();
 }
 
+
+
+
+
+
+
 function renderMovieDescr(movie) {
   const container = document.querySelector('.modal-content');
   const {
@@ -47,13 +52,13 @@ function renderMovieDescr(movie) {
     vote_count,
     overview,
     genre_ids,
-    backdrop_path, 
-    poster_path, video
+    backdrop_path,
+    poster_path,
+    id,
   } = movie[0];
 
-
   const modalBack = document.querySelector('.modal--background');
-  
+
   modalBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${backdrop_path}')`;
   const genres = findAllGenres(genre_ids);
 
@@ -98,10 +103,18 @@ function renderMovieDescr(movie) {
 		<h3 class="article__title">about</h3>
 		<p class="article__description">${overview}</p>
 	  </article>
-	  <button type="button">add to watch</button>
-	  <button type="button">add to queue</button>
+	  <button class="save-movie-btn" type="button">${isMovieInStorage(
+      movie,
+    )}</button>
+	  <button class="save-movie-btn" type="button">add to queue</button>
     </div>
   `;
+
+  const saveBtn = document.querySelector('.save-movie-btn');
+
+  saveBtn.addEventListener('click', () => {
+    switchMovieInLocalStorage(saveBtn, movie);
+  });
 }
 
 function findAllGenres(genresId) {

@@ -5,6 +5,6 @@ import './index.html';
 import './style.scss';
 
 import './js/searcher';
-import './js/fetchPopularMovies';
+import './js/renderPopularMovies';
 import './js/renderMovies';
 import './js/modal';
