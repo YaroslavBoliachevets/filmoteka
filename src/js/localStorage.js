@@ -1,55 +1,69 @@
-function addMovieToStorage(movie) {	
-	// console.log('add movies:', movie[0].id);
-	
-	const movies = JSON.parse(localStorage.getItem('selectedMovies')) || [];
-  
-	const isMovieExists = movies.some(
-	  (storedMovie) => storedMovie[0]?.id === movie[0]?.id,
-	);
-  
-	if (isMovieExists) {
-	} else {
-	  movies.push(movie);
-	  localStorage.setItem('selectedMovies', JSON.stringify(movies));
-	}
-  }
-  
-  function removeMovieFromStorage(movie) {
-	// console.log('remove movies:', movie[0].id);
-	
-	const movies = JSON.parse(localStorage.getItem('selectedMovies')) || [];
-
-	// console.log('delete', (storedMovie[0]?.id !== movie[0]?.id), 'movie?.id:', movie[0]?.id);
-  
-	const updatedMovies = movies.filter(
-	  (storedMovie) => storedMovie[0]?.id !== movie[0]?.id
-	  
-	);
-	// console.log('updatedMovies', updatedMovies);
-	
-	localStorage.setItem('selectedMovies', JSON.stringify(updatedMovies));
+function addMovieToStorage(movie) {
+  if (!movie[0] || !movie[0].id) {
+    console.error('invalid movie obj');
+    return;
   }
 
-  function isMovieInStorage(movie) {
-	const movies = JSON.parse(localStorage.getItem('selectedMovies')) || [];
-  
-	const isMovieExists = movies.some(
-	  (storedMovie) => storedMovie[0]?.id === movie[0]?.id,
-	);
-  
-	return isMovieExists ? 'REMOVE' : 'ADD';
-  }
+  const movies = getDataFromLS('selectedMovies');
 
+  const isMovieExists = movies.some(
+    (storedMovie) => storedMovie[0]?.id === movie[0]?.id,
+  );
+
+  if (!isMovieExists) {
+    movies.push(movie);
+    pushDataToLS('selectedMovies', movies);
+  }
+}
+
+function getDataFromLS(key) {
+  const data = JSON.parse(localStorage.getItem(key)) || [];
+  return data;
+}
+
+function pushDataToLS(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function removeMovieFromStorage(movie) {
+  const movies = getDataFromLS('selectedMovies');
+
+  const updatedMovies = movies.filter(
+    (storedMovie) => storedMovie[0]?.id !== movie[0]?.id,
+  );
+
+  pushDataToLS('selectedMovies', updatedMovies);
+}
+
+function isMovieInStorage(movie) {
+  const movies = getDataFromLS('selectedMovies');
+  const isMovieExists = movies.some(
+    (storedMovie) => storedMovie[0]?.id === movie[0]?.id,
+  );
+
+  return isMovieExists ? 'REMOVE' : 'ADD';
+}
 
 function switchMovieInLocalStorage(btn, movie) {
+  if (!btn || !movie) {
+    console.error('invalid btn or movie obj');
+    return;
+  }
 
-  if (btn.textContent === 'REMOVE') {
+  const isRemoveAction = btn.classList.contains('btn-remove');
+
+  if (isRemoveAction) {
     removeMovieFromStorage(movie);
+    btn.classList.remove('btn-remove');
+    btn.classList.add('btn-add');
     btn.textContent = 'ADD';
   } else {
+    btn.classList.add('btn-remove');
     addMovieToStorage(movie);
+    btn.classList.remove('btn-add');
+    btn.classList.add('btn-remove');
     btn.textContent = 'REMOVE';
   }
 }
 
-export {switchMovieInLocalStorage, isMovieInStorage};
+export { switchMovieInLocalStorage, isMovieInStorage };

@@ -2,17 +2,19 @@ import { options } from './api';
 import { renderMovies } from './renderMovies';
 import { renderPopularMovies } from './renderPopularMovies';
 import { renderPagination } from './pagination';
+import { checkExists, getElementBySelector } from './utils/common';
 
-const searchFrom = document.querySelector('.search-form');
-const searchInput = document.querySelector('.search-input');
+const searchFrom = getElementBySelector('.search-form');
+const searchInput = getElementBySelector('.search-input');
 
 function renderQueryMovies(query, page = 1) {
+  checkExists(query);
   fetchMoviesByQuery(query, page).then((data) => {
     if (data) {
       const { page, total_pages, results } = data;
-
+      checkExists(results);
       if (results === 0) {
-        const warningElement = document.querySelector('.warning');
+        const warningElement = getElementBySelector('.warning');
         warningElement.textContent = '';
         warningElement.textContent =
           'Search result not successful. Enter the correct movie name or watch popular';
@@ -38,17 +40,21 @@ const fetchMoviesByQuery = async function (query, page = 1) {
       options,
     );
 
+    if (!responce.ok) {
+      throw new Error(`HTTP error, status ${responce.status}`);
+    }
     const data = await responce.json();
 
     return data;
   } catch (err) {
     console.error('Error:', err);
+
   }
 };
 
 searchFrom.addEventListener('submit', (e) => {
   e.preventDefault();
-  let query = searchInput.value;
+  let query = searchInput.value.trim();
   renderQueryMovies(query);
 });
 

@@ -1,8 +1,9 @@
 import { renderPopularMovies } from './renderPopularMovies';
 import { renderQueryMovies } from './searcher';
+import { getElementBySelector } from './utils/common';
 
-function renderPagination(page = 1, total_pages=1, query='') {
-  const pagination = document.querySelector('.pagination');
+function renderPagination(page = 1, total_pages = 1, query = '') {
+  const pagination = getElementBySelector('.pagination');
 
   pagination.innerHTML = `<button class="prev" type="button">Prev</button>
 	<span class="page-info">${page} / ${
@@ -10,42 +11,52 @@ function renderPagination(page = 1, total_pages=1, query='') {
   }<span id="current-page"></span></span>
 	<button class="next">Next</button>`;
 
-  const prevButton = document.querySelector('.prev');
-  const nextButton = document.querySelector('.next');
+  const prevButton = getElementBySelector('.prev');
+  const nextButton = getElementBySelector('.next');
 
-  if (page == 1) {
-    prevButton.setAttribute('disabled', 'false');
-  }
+  updateButtonState(prevButton, page === 1);
+
+  // if (page == 1) {
+  //   prevButton.setAttribute('disabled', 'false');
+  // }
 
   if (page == total_pages) {
     nextButton.setAttribute('disabled', 'false');
   }
 
+  nextButton.removeEventListener('click', nextPage);
   nextButton.addEventListener('click', () => {
-    scrollToTop();
-    const nextPage = page + 1;
-
-    if (query) {
-      renderQueryMovies(query, nextPage);
-    } else {
-      renderPopularMovies(nextPage);
-    }
+    nextPage(page, query);
   });
 
-  prevButton.addEventListener('click', () => {
-    scrollToTop();
+  prevButton.removeEventListener('click', prevPage);
+  prevButton.addEventListener('click', () => {prevPage(prevButton, page, query)});
+}
 
-    if (page > 1) {
-      prevButton.removeAttribute('disabled');
-    }
-    page -= 1;
+function nextPage(page, query) {
+  scrollToTop();
+  const nextPage = page + 1;
 
-    if (query) {
-      renderQueryMovies(query, page);
-    } else {
-      renderPopularMovies(page);
-    }
-  });
+  if (query) {
+    renderQueryMovies(query, nextPage);
+  } else {
+    renderPopularMovies(nextPage);
+  }
+}
+
+function prevPage(prevButton, page, query) {
+  scrollToTop();
+
+  if (page > 1) {
+    prevButton.removeAttribute('disabled');
+  }
+  page -= 1;
+
+  if (query) {
+    renderQueryMovies(query, page);
+  } else {
+    renderPopularMovies(page);
+  }
 }
 
 function scrollToTop() {
@@ -53,6 +64,14 @@ function scrollToTop() {
     top: 0,
     behavior: 'smooth',
   });
+}
+
+function updateButtonState(button, isDisabled) {
+  if (isDisabled) {    
+    button.setAttribute('disabled', 'true');
+  } else {
+    button.removeAttribute('disabled');
+  }
 }
 
 export { renderPagination };
