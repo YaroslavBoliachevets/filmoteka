@@ -8,3 +8,4 @@ import './js/searcher';
 import './js/renderPopularMovies';
 import './js/renderMovies';
 import './js/modal';
+import './js/savedMovies';

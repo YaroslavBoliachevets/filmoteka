@@ -3,6 +3,8 @@ import { switchMovieInLocalStorage, isMovieInStorage } from './localStorage';
 import { getElementBySelector, checkExists } from './utils/common';
 
 function openModal(movie) {
+  // console.log('movie modal', movie);
+  
   checkExists(movie);
   document.body.style.overflow = 'hidden';
 
@@ -14,6 +16,11 @@ function openModal(movie) {
 
   renderMovieDescr(movie.movie_results);
   const closeBtn = getElementBySelector('.modal-close-button');
+
+  // console.log('open modal', (isMovieInStorage(movie) === 'REMOVE'), (isMovieInStorage(movie)));
+  
+  // const saveMovieBtn = getElementBySelector('.save-movie-btn');
+  // if (isMovieInStorage(movie) === 'REMOVE') {saveMovieBtn.classList.add('btn-remove')} else {saveMovieBtn.classList.add('btn-add')}
 
   closeBtn.addEventListener('click', closeModal);
 }
@@ -145,7 +152,7 @@ function renderArticle(overview) {
 
 function renderButtons(movie) {
   return `
-<button class="save-movie-btn" type="button">${isMovieInStorage(movie)}</button>
+<button class="save-movie-btn ${isMovieInStorage(movie)}" type="button">${isMovieInStorage(movie)}</button>
 	  <button class="save-movie-btn" type="button">add to queue</button>
 `;
 }

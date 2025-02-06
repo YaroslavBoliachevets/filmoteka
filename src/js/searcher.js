@@ -21,12 +21,9 @@ function renderQueryMovies(query, page = 1) {
 
         renderPopularMovies();
       }
-
       renderMovies(data);
 
-      if (total_pages > 1) {
         renderPagination(page, total_pages, query);
-      }
     }
   });
 }

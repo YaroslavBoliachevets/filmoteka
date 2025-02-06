@@ -22,6 +22,8 @@ function getDataFromLS(key) {
 }
 
 function pushDataToLS(key, data) {
+  // console.log('data to ls', data.flat());
+  
   localStorage.setItem(key, JSON.stringify(data));
 }
 
@@ -40,6 +42,8 @@ function isMovieInStorage(movie) {
   const isMovieExists = movies.some(
     (storedMovie) => storedMovie[0]?.id === movie[0]?.id,
   );
+// console.log('isMovieExists', isMovieExists);
+console.log(' isMovieExists ? REMOVE : ADD',  isMovieExists ? 'REMOVE' : 'ADD');
 
   return isMovieExists ? 'REMOVE' : 'ADD';
 }
@@ -50,20 +54,20 @@ function switchMovieInLocalStorage(btn, movie) {
     return;
   }
 
-  const isRemoveAction = btn.classList.contains('btn-remove');
+  const isRemoveAction = btn.classList.contains('REMOVE');
 
   if (isRemoveAction) {
     removeMovieFromStorage(movie);
-    btn.classList.remove('btn-remove');
-    btn.classList.add('btn-add');
+    btn.classList.remove('REMOVE');
+    btn.classList.add('ADD');
     btn.textContent = 'ADD';
   } else {
-    btn.classList.add('btn-remove');
+    btn.classList.add('REMOVE');
     addMovieToStorage(movie);
-    btn.classList.remove('btn-add');
-    btn.classList.add('btn-remove');
+    btn.classList.remove('ADD');
+    btn.classList.add('REMOVE');
     btn.textContent = 'REMOVE';
   }
 }
 
-export { switchMovieInLocalStorage, isMovieInStorage };
+export { switchMovieInLocalStorage, isMovieInStorage, getDataFromLS };

@@ -5,7 +5,8 @@ import { getElementBySelector } from './utils/common';
 
 function renderMovies({ results: movies }) {
   const container = getElementBySelector('.movies');
-
+  
+  
   container.innerHTML = '';
   movies.forEach(
     ({
@@ -50,12 +51,15 @@ function findGenres(genresId) {
 }
 
 async function handleMovieClick(id) {
+  // console.log('id', id);
+  
   try {
     const movie = await fetchMovieById(id);
+// console.log('movie', movie);
 
     openModal(movie);
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Error1:', err);
   }
 }
 export { renderMovies, findGenres };

@@ -3,6 +3,7 @@ import { renderQueryMovies } from './searcher';
 import { getElementBySelector } from './utils/common';
 
 function renderPagination(page = 1, total_pages = 1, query = '') {
+  
   const pagination = getElementBySelector('.pagination');
 
   pagination.innerHTML = `<button class="prev" type="button">Prev</button>
@@ -15,10 +16,6 @@ function renderPagination(page = 1, total_pages = 1, query = '') {
   const nextButton = getElementBySelector('.next');
 
   updateButtonState(prevButton, page === 1);
-
-  // if (page == 1) {
-  //   prevButton.setAttribute('disabled', 'false');
-  // }
 
   if (page == total_pages) {
     nextButton.setAttribute('disabled', 'false');
