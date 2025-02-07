@@ -43,7 +43,7 @@ function isMovieInStorage(movie) {
     (storedMovie) => storedMovie[0]?.id === movie[0]?.id,
   );
 // console.log('isMovieExists', isMovieExists);
-console.log(' isMovieExists ? REMOVE : ADD',  isMovieExists ? 'REMOVE' : 'ADD');
+// console.log(' isMovieExists ? REMOVE : ADD',  isMovieExists ? 'REMOVE' : 'ADD');
 
   return isMovieExists ? 'REMOVE' : 'ADD';
 }

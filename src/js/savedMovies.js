@@ -11,17 +11,26 @@ library.addEventListener('click', (e) => {
 
 function renderSavedMovies() {
 	const library = getElementBySelector('.library');
-	library.classList.add('.accent');
+	library.classList.add('accent');
 	const movies = getDataFromLS('selectedMovies');
 	checkExists(movies);
 
 	const formatedData = {results: movies.flat()};
 	
-	renderMovies(formatedData);
-	if (formatedData) {renderPagination()} else {
-		'No saved movies yet'
-	}
 	
+	renderMovies(formatedData);
 }
 
-export {renderSavedMovies};
+function updatesSavedList(scrollPosition) {
+	const library = getElementBySelector('.library');
+	if (library.classList.contains('accent')) {
+		console.log('scrollPosition', scrollPosition);
+		
+		renderSavedMovies();
+		setTimeout(() => {
+			window.scrollTo(0, scrollPosition);
+		  }, 400);
+	}
+}
+
+export {renderSavedMovies, updatesSavedList};

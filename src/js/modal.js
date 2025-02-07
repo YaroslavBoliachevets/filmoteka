@@ -1,9 +1,13 @@
 import { genresList } from './api';
 import { switchMovieInLocalStorage, isMovieInStorage } from './localStorage';
 import { getElementBySelector, checkExists } from './utils/common';
+import { updatesSavedList } from './savedMovies';
 
 function openModal(movie) {
   // console.log('movie modal', movie);
+  const scrollPosition = window.scrollY;
+  console.log('scrollPosition open modal', scrollPosition);
+  
   
   checkExists(movie);
   document.body.style.overflow = 'hidden';
@@ -11,8 +15,8 @@ function openModal(movie) {
   const modal = getElementBySelector('.modal');
   modal.classList.add('is-open');
 
-  window.addEventListener('click', outsideClick);
-  window.addEventListener('keydown', handleEscClose);
+  window.addEventListener('click', (e => outsideClick(e, scrollPosition)));
+  window.addEventListener('keydown', (e => handleEscClose(e, scrollPosition)));
 
   renderMovieDescr(movie.movie_results);
   const closeBtn = getElementBySelector('.modal-close-button');
@@ -22,29 +26,33 @@ function openModal(movie) {
   // const saveMovieBtn = getElementBySelector('.save-movie-btn');
   // if (isMovieInStorage(movie) === 'REMOVE') {saveMovieBtn.classList.add('btn-remove')} else {saveMovieBtn.classList.add('btn-add')}
 
-  closeBtn.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', (e => closeModal(e, scrollPosition)));
 }
 
-function closeModal() {
+function closeModal(e, scrollPosition) {
+  // e.preventDefault(e);
+  console.log('scrollPosition', e, scrollPosition);
+  
   document.body.style.overflow = '';
   const closeBtn = getElementBySelector('.modal-close-button');
   const modal = getElementBySelector('.modal');
 
   modal.classList.remove('is-open');
 
-  window.removeEventListener('click', outsideClick);
-  window.removeEventListener('keydown', handleEscClose);
+  window.removeEventListener('click', (e => outsideClick(e, scrollPosition)));
+  window.removeEventListener('keydown', (e => handleEscClose(e, scrollPosition)));
   closeBtn.removeEventListener('click', closeModal);
+  updatesSavedList(scrollPosition);
 }
 
-function outsideClick(e) {
+function outsideClick(e, scrollPosition) {
   const modal = getElementBySelector('.modal--background');
 
-  if (e.target === modal) closeModal();
+  if (e.target === modal) closeModal(e, scrollPosition);
 }
 
-function handleEscClose(e) {
-  if (e.key === 'Escape' || e.key === 'Esc') closeModal();
+function handleEscClose(e, scrollPosition) {
+  if (e.key === 'Escape' || e.key === 'Esc') closeModal(e, scrollPosition);
 }
 
 function renderMovieDescr(movie) {
