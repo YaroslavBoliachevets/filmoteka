@@ -2,10 +2,13 @@ import { genresList } from './api';
 import { openModal } from './modal';
 import { fetchMovieById } from './searcher';
 import { getElementBySelector } from './utils/common';
+import { renderSavedSign } from './savedMovies';
+// import { saveState } from './localStorage';
 
-function renderMovies({ results: movies }) {
+function renderMovies({ results: movies }, page=1, query='') {
   const container = getElementBySelector('.movies');
-  
+
+  // saveState();
   
   container.innerHTML = '';
   movies.forEach(
@@ -23,6 +26,7 @@ function renderMovies({ results: movies }) {
       movieCard.classList.add('movie-card');
 
       movieCard.innerHTML = `
+      ${renderSavedSign(id)}
       <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${title}" />
       <div class="movie-description">
         <p class="movie-name">${title}</p>
@@ -56,6 +60,7 @@ async function handleMovieClick(id) {
   try {
     const movie = await fetchMovieById(id);
 // console.log('movie', movie);
+
 
     openModal(movie);
   } catch (err) {

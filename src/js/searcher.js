@@ -3,6 +3,7 @@ import { renderMovies } from './renderMovies';
 import { renderPopularMovies } from './renderPopularMovies';
 import { renderPagination } from './pagination';
 import { checkExists, getElementBySelector } from './utils/common';
+import { pushDataToLS } from './localStorage';
 
 const searchFrom = getElementBySelector('.search-form');
 const searchInput = getElementBySelector('.search-input');
@@ -12,6 +13,9 @@ function renderQueryMovies(query, page = 1) {
   fetchMoviesByQuery(query, page).then((data) => {
     if (data) {
       const { page, total_pages, results } = data;
+      pushDataToLS('query', query);
+      pushDataToLS('movies', data);
+
       checkExists(results);
       if (results === 0) {
         const warningElement = getElementBySelector('.warning');
@@ -23,7 +27,7 @@ function renderQueryMovies(query, page = 1) {
       }
       renderMovies(data);
 
-        renderPagination(page, total_pages, query);
+      renderPagination(page, total_pages, query);
     }
   });
 }
@@ -45,7 +49,6 @@ const fetchMoviesByQuery = async function (query, page = 1) {
     return data;
   } catch (err) {
     console.error('Error:', err);
-
   }
 };
 

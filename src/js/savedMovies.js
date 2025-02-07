@@ -19,13 +19,16 @@ function renderSavedMovies() {
 	
 	
 	renderMovies(formatedData);
+	renderPagination();
 }
 
-function updatesSavedList(scrollPosition) {
+function updatesSavedList() {
 	const library = getElementBySelector('.library');
 	if (library.classList.contains('accent')) {
-		console.log('scrollPosition', scrollPosition);
 		
+		const scrollPosition = getDataFromLS("scrollPosition");
+
+		// console.log('scrollPosition', scrollPosition);
 		renderSavedMovies();
 		setTimeout(() => {
 			window.scrollTo(0, scrollPosition);
@@ -33,4 +36,14 @@ function updatesSavedList(scrollPosition) {
 	}
 }
 
-export {renderSavedMovies, updatesSavedList};
+function renderSavedSign(id) {
+	const movies = getDataFromLS('selectedMovies');
+  const isMovieExists = movies.some(
+    (storedMovie) => storedMovie[0]?.id === id,
+  );
+  if (isMovieExists) {
+	return `<button>SSSSSAAAAAAVED</button>`
+  } else return ''
+}
+
+export {renderSavedMovies, updatesSavedList, renderSavedSign};

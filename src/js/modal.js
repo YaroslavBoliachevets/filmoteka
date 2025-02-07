@@ -1,59 +1,82 @@
 import { genresList } from './api';
-import { switchMovieInLocalStorage, isMovieInStorage } from './localStorage';
+import {
+  switchMovieInLocalStorage,
+  isMovieInStorage,
+  pushDataToLS,
+  getDataFromLS,
+} from './localStorage';
 import { getElementBySelector, checkExists } from './utils/common';
 import { updatesSavedList } from './savedMovies';
+import { renderMovies } from './renderMovies';
 
 function openModal(movie) {
-  // console.log('movie modal', movie);
   const scrollPosition = window.scrollY;
-  console.log('scrollPosition open modal', scrollPosition);
-  
-  
+  pushDataToLS('scrollPosition', scrollPosition);
+  // console.log('open');
+
   checkExists(movie);
   document.body.style.overflow = 'hidden';
 
   const modal = getElementBySelector('.modal');
   modal.classList.add('is-open');
 
-  window.addEventListener('click', (e => outsideClick(e, scrollPosition)));
-  window.addEventListener('keydown', (e => handleEscClose(e, scrollPosition)));
+  window.addEventListener('click', outsideClick);
+  window.addEventListener('keydown', handleEscClose);
 
   renderMovieDescr(movie.movie_results);
   const closeBtn = getElementBySelector('.modal-close-button');
 
-  // console.log('open modal', (isMovieInStorage(movie) === 'REMOVE'), (isMovieInStorage(movie)));
-  
-  // const saveMovieBtn = getElementBySelector('.save-movie-btn');
-  // if (isMovieInStorage(movie) === 'REMOVE') {saveMovieBtn.classList.add('btn-remove')} else {saveMovieBtn.classList.add('btn-add')}
+  // save to del listeners late
+  modal._outsideClickHandler = outsideClick;
+  modal._handleEscClose = handleEscClose;
+  closeBtn._handleCloseBtnClick = handleCloseBtnClick;
 
-  closeBtn.addEventListener('click', (e => closeModal(e, scrollPosition)));
+  closeBtn.addEventListener('click', handleCloseBtnClick);
 }
 
-function closeModal(e, scrollPosition) {
-  // e.preventDefault(e);
-  console.log('scrollPosition', e, scrollPosition);
-  
+function closeModal() {
+  // console.log('close', );
+
   document.body.style.overflow = '';
   const closeBtn = getElementBySelector('.modal-close-button');
   const modal = getElementBySelector('.modal');
 
   modal.classList.remove('is-open');
 
-  window.removeEventListener('click', (e => outsideClick(e, scrollPosition)));
-  window.removeEventListener('keydown', (e => handleEscClose(e, scrollPosition)));
-  closeBtn.removeEventListener('click', closeModal);
-  updatesSavedList(scrollPosition);
+  window.removeEventListener('click', modal._outsideClick);
+  window.removeEventListener('keydown', modal._handleEscClose);
+  closeBtn.removeEventListener('click', modal._handleCloseBtnClick);
+
+  const movies = getDataFromLS('movies');
+  const page = getDataFromLS('page');
+  const query = getDataFromLS('query');
+  renderMovies(movies, page, query);
+  updatesSavedList();
 }
 
-function outsideClick(e, scrollPosition) {
+function outsideClick(e) {
   const modal = getElementBySelector('.modal--background');
 
-  if (e.target === modal) closeModal(e, scrollPosition);
+  if (e.target === modal) closeModal();
 }
 
-function handleEscClose(e, scrollPosition) {
-  if (e.key === 'Escape' || e.key === 'Esc') closeModal(e, scrollPosition);
+function handleEscClose(e) {
+  if (e.key === 'Escape' || e.key === 'Esc') closeModal();
 }
+
+function handleCloseBtnClick() {
+  closeModal();
+}
+
+// function outsideClick(e, scrollPosition) {
+//   const modal = getElementBySelector('.modal--background');
+
+//   if (e.target === modal) closeModal(e, scrollPosition);
+// }
+
+// function handleEscClose(e, scrollPosition) {
+//   if (e.key === 'Escape' || e.key === 'Esc') closeModal(e, scrollPosition);
+// }
 
 function renderMovieDescr(movie) {
   checkExists(movie);
@@ -160,7 +183,9 @@ function renderArticle(overview) {
 
 function renderButtons(movie) {
   return `
-<button class="save-movie-btn ${isMovieInStorage(movie)}" type="button">${isMovieInStorage(movie)}</button>
+<button class="save-movie-btn ${isMovieInStorage(
+    movie,
+  )}" type="button">${isMovieInStorage(movie)}</button>
 	  <button class="save-movie-btn" type="button">add to queue</button>
 `;
 }

@@ -1,7 +1,7 @@
 import { renderMovies } from "./renderMovies";
 import { options } from "./api";
 import { renderPagination } from "./pagination";
-
+import {pushDataToLS} from './localStorage'; 
 const fetchPopularMovies = async function (page=1) {
 	try {
 	  const response = await fetch(
@@ -21,6 +21,9 @@ const fetchPopularMovies = async function (page=1) {
 		if (data) {
 			const {page, total_pages} =  data;
 		  renderMovies(data);
+		  pushDataToLS('movies', data);
+		  pushDataToLS('query', '');
+		  pushDataToLS('scrollPosition', 0);
 		  
 		  renderPagination(page, total_pages);
 		}

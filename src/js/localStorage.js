@@ -70,4 +70,4 @@ function switchMovieInLocalStorage(btn, movie) {
   }
 }
 
-export { switchMovieInLocalStorage, isMovieInStorage, getDataFromLS };
+export { switchMovieInLocalStorage, isMovieInStorage, getDataFromLS, pushDataToLS };

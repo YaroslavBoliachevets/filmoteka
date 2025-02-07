@@ -1,3 +1,4 @@
+
 function checkExists(data) {
   if (!data) {
     console.error(`${data} not found`);
