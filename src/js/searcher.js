@@ -17,9 +17,11 @@ function renderQueryMovies(query, page = 1) {
       pushDataToLS('movies', data);
 
       checkExists(results);
-      if (results === 0) {
-        const warningElement = getElementBySelector('.warning');
-        warningElement.textContent = '';
+
+      const warningElement = getElementBySelector('.warning');
+      warningElement.textContent = '';
+
+      if (results.length === 0) {
         warningElement.textContent =
           'Search result not successful. Enter the correct movie name or watch popular';
 

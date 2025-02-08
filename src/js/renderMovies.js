@@ -3,7 +3,6 @@ import { openModal } from './modal';
 import { fetchMovieById } from './searcher';
 import { getElementBySelector } from './utils/common';
 import { renderSavedSign } from './savedMovies';
-// import { saveState } from './localStorage';
 
 function renderMovies({ results: movies }, page=1, query='') {
   const container = getElementBySelector('.movies');

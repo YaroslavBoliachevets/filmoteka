@@ -2,16 +2,35 @@ import { getDataFromLS } from "./localStorage";
 import { checkExists, getElementBySelector } from "./utils/common";
 import { renderMovies } from "./renderMovies";
 import { renderPagination } from "./pagination";
+import { renderPopularMovies } from "./renderPopularMovies";
 
 const library = getElementBySelector('.library');
+const home = getElementBySelector('.home');
+
 library.addEventListener('click', (e) => {
 	e.preventDefault();
+
+	const library = getElementBySelector('.library');
+	const home = getElementBySelector('.home');
+	
+	home.classList.remove('accent');
+	library.classList.add('accent');
+	renderPopularMovies();
+});
+
+home.addEventListener('click', (e) => {
+	e.preventDefault();
+
+	const library = getElementBySelector('.library');
+	const home = getElementBySelector('.home');
+	
+	library.classList.remove('accent');
+	home.classList.add('accent');
 	renderSavedMovies();
-})
+});
 
 function renderSavedMovies() {
-	const library = getElementBySelector('.library');
-	library.classList.add('accent');
+	
 	const movies = getDataFromLS('selectedMovies');
 	checkExists(movies);
 
@@ -42,7 +61,7 @@ function renderSavedSign(id) {
     (storedMovie) => storedMovie[0]?.id === id,
   );
   if (isMovieExists) {
-	return `<button>SSSSSAAAAAAVED</button>`
+	return `<button class='selected-movie'>Saved</button>`
   } else return ''
 }
 

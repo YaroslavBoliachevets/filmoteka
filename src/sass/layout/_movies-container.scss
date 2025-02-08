@@ -9,6 +9,7 @@
 
 // w280h402
 .movie-card {
+	position: relative;
 	cursor: pointer;
 	min-width: 280px;
 	margin-bottom: 20px;
@@ -30,4 +31,12 @@
 .movie-genre {
 	text-transform: capitalize;
 	color: rgb(255, 107, 8);
+}
+
+.selected-movie {
+position: absolute;
+top: 0;
+right: 0;
+
+padding: 5px 10px;
 }

@@ -1,6 +1,9 @@
 
 @use './sass/base/common';
 @use './sass/base/resets';
+@use './sass/base/themes';
+@use './sass/base/typography';
+@use './sass/base/variables';
 
 @use './sass/components/container';
 @use './sass/components/titles';

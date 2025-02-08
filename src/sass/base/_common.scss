@@ -3,6 +3,11 @@
   // background-color: red;
 }
 
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 500;
+}
+
 ::-webkit-scrollbar, ::-webkit-scrollbar-track {
   scrollbar-width: thin; 
   scrollbar-color: #1d180eb4 #1d180eb4; 
@@ -10,16 +15,6 @@
   // background: #f1f1f1; /* Цвет трека скроллбара */
   border-radius: 10px;
 }
-
-
-// body::-webkit-scrollbar, 
-// body::-webkit-scrollbar-track,
-// body::-webkit-scrollbar-thumb, {
-//   width: 12px;
-//   background: #f1f1f1; 
-//   border-radius: 10px;
-// }
-
 
  .modal-body::-webkit-scrollbar-thumb {
   background: #df3232; /* Цвет "ползунка" */
@@ -46,4 +41,11 @@ p {
 
 button {
   cursor:pointer;
+  
+  &:hover,
+  &:focus {
+    color: var(--text-accent);
+    transition: color 300ms linear;
+    transition: color 300ms linear;
+  }
 }
