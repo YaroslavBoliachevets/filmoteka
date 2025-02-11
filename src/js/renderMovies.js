@@ -4,11 +4,9 @@ import { fetchMovieById } from './searcher';
 import { getElementBySelector } from './utils/common';
 import { renderSavedSign } from './savedMovies';
 
-function renderMovies({ results: movies }, page=1, query='') {
+function renderMovies({ results: movies }) {
   const container = getElementBySelector('.movies');
 
-  // saveState();
-  
   container.innerHTML = '';
   movies.forEach(
     ({
@@ -55,11 +53,10 @@ function findGenres(genresId) {
 
 async function handleMovieClick(id) {
   // console.log('id', id);
-  
+
   try {
     const movie = await fetchMovieById(id);
-// console.log('movie', movie);
-
+    // console.log('movie', movie);
 
     openModal(movie);
   } catch (err) {

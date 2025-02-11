@@ -19,6 +19,7 @@ function renderPagination(page = 1, total_pages = 1, query = '') {
 
   if (page == total_pages) {
     nextButton.setAttribute('disabled', 'false');
+    nextButton.classList.add('disabled');
   }
 
   nextButton.removeEventListener('click', nextPage);
@@ -46,6 +47,7 @@ function prevPage(prevButton, page, query) {
 
   if (page > 1) {
     prevButton.removeAttribute('disabled');
+    prevButton.classList.remove('disabled');
   }
   page -= 1;
 
@@ -66,8 +68,10 @@ function scrollToTop() {
 function updateButtonState(button, isDisabled) {
   if (isDisabled) {    
     button.setAttribute('disabled', 'true');
+    button.classList.add('disabled')
   } else {
     button.removeAttribute('disabled');
+    button.classList.remove('disabled');
   }
 }
 

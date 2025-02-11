@@ -15,7 +15,8 @@ library.addEventListener('click', (e) => {
 	
 	home.classList.remove('accent');
 	library.classList.add('accent');
-	renderPopularMovies();
+	renderSavedMovies();
+
 });
 
 home.addEventListener('click', (e) => {
@@ -26,16 +27,14 @@ home.addEventListener('click', (e) => {
 	
 	library.classList.remove('accent');
 	home.classList.add('accent');
-	renderSavedMovies();
+	renderPopularMovies();
 });
 
 function renderSavedMovies() {
-	
 	const movies = getDataFromLS('selectedMovies');
 	checkExists(movies);
 
 	const formatedData = {results: movies.flat()};
-	
 	
 	renderMovies(formatedData);
 	renderPagination();
@@ -47,7 +46,6 @@ function updatesSavedList() {
 		
 		const scrollPosition = getDataFromLS("scrollPosition");
 
-		// console.log('scrollPosition', scrollPosition);
 		renderSavedMovies();
 		setTimeout(() => {
 			window.scrollTo(0, scrollPosition);
@@ -61,7 +59,7 @@ function renderSavedSign(id) {
     (storedMovie) => storedMovie[0]?.id === id,
   );
   if (isMovieExists) {
-	return `<button class='selected-movie'>Saved</button>`
+	return `<p class='selected-movie' disabled>Saved</p>`
   } else return ''
 }
 

@@ -4,25 +4,27 @@
 }
 
 body {
-  font-family: "Roboto", "Arial", sans-serif;
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-weight: 500;
 }
 
-::-webkit-scrollbar, ::-webkit-scrollbar-track {
-  scrollbar-width: thin; 
-  scrollbar-color: #1d180eb4 #1d180eb4; 
+::-webkit-scrollbar,
+::-webkit-scrollbar-track {
+  scrollbar-width: thin;
+  scrollbar-color: #1d180eb4 #1d180eb4;
 
   // background: #f1f1f1; /* Цвет трека скроллбара */
   border-radius: 10px;
 }
 
- .modal-body::-webkit-scrollbar-thumb {
+.modal-body::-webkit-scrollbar-thumb {
   background: #df3232; /* Цвет "ползунка" */
   border-radius: 10px; /* Закругленные углы */
 }
 
-body::-webkit-scrollbar-thumb:hover, .modal-content::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+body::-webkit-scrollbar-thumb:hover,
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 a {
@@ -37,15 +39,37 @@ a {
 p {
   font-weight: 500;
   font-size: 12px;
+
+  @media (min-width:1024px) {
+    font-size: 20px;
+  }
 }
 
 button {
-  cursor:pointer;
-  
-  &:hover,
-  &:focus {
+
+  font-weight: 600;
+	border-radius: 5px;
+	width: 100px;
+	background-color: var(--accent);
+	color: var(--btn-color);
+	border: 0px;
+	padding: 10px 15px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--accent-focus);
     color: var(--text-accent);
+    transition: background-color 300ms linear;
     transition: color 300ms linear;
-    transition: color 300ms linear;
+  }
+
+  &.disabled{
+    background-color: rgb(247 178 99);
+    color: #292929;
+  }
+
+  &.disabled :hover, &.disabled :focus {
+    background-color: rgb(247 178 99);
+    color: #292929; 
   }
 }

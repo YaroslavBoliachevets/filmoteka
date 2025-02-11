@@ -1,13 +1,11 @@
-
 .nav {
-	display: flex;
-	margin-bottom: 60px;
+  display: flex;
+  margin-bottom: 60px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-
 
   &__svg {
     width: 24px;
@@ -18,8 +16,7 @@
 .menu {
   display: flex;
   align-items: center;
-  margin-left: auto;
-
+  margin: 0 auto;
 }
 
 .menu-list {
@@ -30,93 +27,100 @@
   }
 
   &__item--link {
-	position: relative;
-	text-transform: uppercase;
-	color:var(--header);
+    position: relative;
+    text-transform: uppercase;
+    color: var(--header);
 
-	&.accent {color:var(--accent)}
+    &.accent {
+      color: var(--header);
+    }
   }
 
   &__item--link.accent::after {
-	content: '';
-	display: block;
-	position: absolute;
-	
-	top: 20px;
-	width: 100%;
-	height: 2px;
-	border-radius: 5px;
-	background-color: var(--accent);
+    content: '';
+    display: block;
+    position: absolute;
+
+    top: 20px;
+    width: 100%;
+    height: 2px;
+    border-radius: 5px;
+    background-color: var(--accent);
   }
 
-  &__item--link:hover, &__item--link:focus {
-	color:var(--accent);
+  &__item--link:hover {
+    color: var(--accent);
   }
 }
 
 .search {
-	box-sizing: border-box;
-	width: 100%;
-	
+  box-sizing: border-box;
+  width: 100%;
 
-	&-form {
-		display: flex;
-		padding-bottom: 5px;
-	}
+  &-form {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5px;
+  }
 
-	&-input {
-		width: 230px;
-		margin-right: 5px;
-		padding: 5px;
-		background-color: transparent;
-		border: 0px;
-		border: 1px solid  rgba(128, 128, 128, 0.536);
-		position: relative;
+  &-input {
+    width: 230px;
+    margin-right: 5px;
+    padding: 5px;
+    background-color: transparent;
+    border: 0px;
+    border: 1px solid rgba(128, 128, 128, 0.536);
+    position: relative;
 
-		color: rgb(160, 158, 158);
+    color: rgb(160, 158, 158);
 
-		&:hover, &:focus {
-			outline: none;
-		border-color:grey;
-		}
+    @media (min-width:767px) {
+      width: 280px;
+    }
 
-		&::placeholder {
-			// color: gray;
-			color:  rgba(128, 128, 128, 0.536);
-  font-style: italic;
-  font-size: 14px;
-		}
-		&:focus::placeholder, &:hover::placeholder {
-			color:  grey;
-		}
-	}
+    &:hover,
+    &:focus {
+      outline: none;
+      border-color: grey;
+    }
 
-	&-input--svg {
-		fill: red;
-		position: relative;
-		width: 10px;
-		height: 10px;
-		top: -14px;
-		left: 270px;
-	}
+    &::placeholder {
+      // color: gray;
+      color: rgba(128, 128, 128, 0.536);
+      font-style: italic;
+      font-size: 14px;
+    }
+    &:focus::placeholder,
+    &:hover::placeholder {
+      color: grey;
+    }
+  }
 
-	&-button {
-		width: 70px;
-		text-transform: capitalize;
-		background-color:  rgba(128, 128, 128, 0.536);
-		border: 0px;
-		cursor: pointer;
-		color: rgb(182, 180, 180);
-		outline: none;
+  &-input--svg {
+    fill: red;
+    position: relative;
+    width: 10px;
+    height: 10px;
+    top: -14px;
+    left: 270px;
+  }
 
-		&:hover {
-			background-color:  grey;
-			color: rgb(239, 239, 239);
-		}
-	}
+  &-button {
+    width: 70px;
+    text-transform: capitalize;
+    background-color: rgba(128, 128, 128, 0.536);
+    border: 0px;
+    cursor: pointer;
+    color: rgb(182, 180, 180);
+    outline: none;
+
+    &:hover {
+      background-color: grey;
+      color: rgb(239, 239, 239);
+    }
+  }
 }
 
 .warning {
-	color: red;
-	
+  color: red;
 }

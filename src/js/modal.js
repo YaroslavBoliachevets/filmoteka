@@ -68,40 +68,30 @@ function handleCloseBtnClick() {
   closeModal();
 }
 
-// function outsideClick(e, scrollPosition) {
-//   const modal = getElementBySelector('.modal--background');
-
-//   if (e.target === modal) closeModal(e, scrollPosition);
-// }
-
-// function handleEscClose(e, scrollPosition) {
-//   if (e.key === 'Escape' || e.key === 'Esc') closeModal(e, scrollPosition);
-// }
-
 function renderMovieDescr(movie) {
-  checkExists(movie);
-  const container = getElementBySelector('.modal-content');
-  const {
-    title = 'Unknown Title',
-    original_title = 'Unknown Original Title',
-    popularity = 0,
-    vote_average = 0,
-    vote_count = 0,
-    overview = 'No description available',
-    genre_ids = [],
-    backdrop_path,
-    poster_path,
-    id,
-  } = movie[0];
+  if (checkExists(movie)) {
+    const container = getElementBySelector('.modal-content');
+    const {
+      title = 'Unknown Title',
+      original_title = 'Unknown Original Title',
+      popularity = 0,
+      vote_average = 0,
+      vote_count = 0,
+      overview = 'No description available',
+      genre_ids = [],
+      backdrop_path,
+      poster_path,
+      id,
+    } = movie[0];
 
-  const modalBack = getElementBySelector('.modal--background');
+    const modalBack = getElementBySelector('.modal--background');
 
-  modalBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${backdrop_path}')`;
-  const genres = findAllGenres(genre_ids);
+    modalBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${backdrop_path}')`;
+    const genres = findAllGenres(genre_ids);
 
-  checkExists(container);
+    checkExists(container);
 
-  container.innerHTML = `
+    container.innerHTML = `
   <button class="modal-close-button" type="button">x</button>
   <img
       class="modal-poster"
@@ -125,11 +115,12 @@ function renderMovieDescr(movie) {
     </div>
   `;
 
-  const saveBtn = getElementBySelector('.save-movie-btn');
+    const saveBtn = getElementBySelector('.save-movie-btn');
 
-  saveBtn.addEventListener('click', () => {
-    switchMovieInLocalStorage(saveBtn, movie);
-  });
+    saveBtn.addEventListener('click', () => {
+      switchMovieInLocalStorage(saveBtn, movie);
+    });
+  }
 }
 
 function findAllGenres(genresId) {
@@ -182,11 +173,10 @@ function renderArticle(overview) {
 }
 
 function renderButtons(movie) {
-  return `
-<button class="save-movie-btn ${isMovieInStorage(
+  
+  return `<button class="save-movie-btn ${isMovieInStorage(
     movie,
   )}" type="button">${isMovieInStorage(movie)}</button>
-	  <button class="save-movie-btn" type="button">add to queue</button>
 `;
 }
 

@@ -1,9 +1,10 @@
 
 function checkExists(data) {
-  if (!data) {
+  if (!data || data.length === 0) {
+    
     console.error(`${data} not found`);
-    return;
-  }
+    return false;
+  } return true
 }
 
 function getElementBySelector(selector) {
