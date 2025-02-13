@@ -4,7 +4,10 @@ function checkExists(data) {
     
     console.error(`${data} not found`);
     return false;
-  } return true
+  } 
+  console.log('data', data);
+  
+  return true
 }
 
 function getElementBySelector(selector) {

@@ -35,7 +35,6 @@
   position: absolute;
 
   height: 80%;
-  // height: 400px;
   padding: 40px 20px;
   border-radius: 10px;
   background-color: white;
@@ -56,6 +55,17 @@
   @media (min-width:320px) {
     width: 320px;
   }
+
+  @media (min-width:768px) {
+    width: 704px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width:1024px) {
+    width: 806px;
+  
+  }
 }
 
 .modal-close-button {
@@ -68,6 +78,11 @@
   width: 30px;
   height: 30px;
   color: var(--main);
+
+  @media (min-width:768px) {
+    top: 2%;
+    left: 95%;
+  }
 }
 
 .modal-poster {
@@ -78,6 +93,30 @@
 
   @media (min-width:320px) {
     width: 280px;
+  }
+
+  @media (min-width:768px) {
+    width: 264px;
+    height: 373px;
+    margin: 0;
+  }
+
+  @media (min-width:1024px) {
+    width: 375px;
+    height: 478px;
+  
+  }
+}
+
+.modal-description {
+  @media (min-width:768px) {
+    width: 264px;
+    margin-left: 68px;
+  }
+
+  @media (min-width:1024px) {
+    width: 391px;
+  margin-left: 16px;
   }
 }
 
@@ -92,7 +131,7 @@
 }
 
 .metric-list__item {
-  font-style: 12px;
+  font-size: 12px;
   margin: 8px 0;
   display: flex;
   justify-content: space-between;
