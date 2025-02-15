@@ -29,7 +29,9 @@ function renderQueryMovies(query, page = 1) {
       }
       renderMovies(data);
 
-      renderPagination(page, total_pages, query);
+      renderPagination(page, total_pages, (page) =>
+        renderQueryMovies(query, page),
+      );
     }
   });
 }

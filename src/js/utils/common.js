@@ -5,7 +5,7 @@ function checkExists(data) {
     console.error(`${data} not found`);
     return false;
   } 
-  console.log('data', data);
+  // console.log('data', data);
   
   return true
 }

@@ -7,6 +7,7 @@ import './style.scss';
 import './js/searcher';
 import './js/renderPopularMovies';
 import './js/renderMovies';
+import './js/filter';
 import './js/modal';
 import './js/savedMovies';
 

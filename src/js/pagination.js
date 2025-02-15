@@ -1,9 +1,6 @@
-import { renderPopularMovies } from './renderPopularMovies';
-import { renderQueryMovies } from './searcher';
 import { getElementBySelector } from './utils/common';
 
-function renderPagination(page = 1, total_pages = 1, query = '') {
-  
+function renderPagination(page = 1, total_pages = 1, callback) {
   const pagination = getElementBySelector('.pagination');
 
   pagination.innerHTML = `<button class="prev" type="button">Prev</button>
@@ -22,40 +19,30 @@ function renderPagination(page = 1, total_pages = 1, query = '') {
     nextButton.classList.add('disabled');
   }
 
-  nextButton.removeEventListener('click', nextPage);
-  nextButton.addEventListener('click', () => {
-    nextPage(page, query);
-  });
+  nextButton.removeEventListener('click', () => nextPage(page, callback));
+  nextButton.addEventListener('click', () => nextPage(page, callback));
 
   prevButton.removeEventListener('click', prevPage);
-  prevButton.addEventListener('click', () => {prevPage(prevButton, page, query)});
+  prevButton.addEventListener('click', () => prevPage(page, callback));
 }
 
-function nextPage(page, query) {
+function nextPage(page, callback) {
   scrollToTop();
   const nextPage = page + 1;
-
-  if (query) {
-    renderQueryMovies(query, nextPage);
-  } else {
-    renderPopularMovies(nextPage);
-  }
+  callback(nextPage);
 }
 
-function prevPage(prevButton, page, query) {
+function prevPage(page, callback) {
   scrollToTop();
 
+  const prevButton = getElementBySelector('.prev');
   if (page > 1) {
     prevButton.removeAttribute('disabled');
     prevButton.classList.remove('disabled');
   }
-  page -= 1;
 
-  if (query) {
-    renderQueryMovies(query, page);
-  } else {
-    renderPopularMovies(page);
-  }
+  const newPage = page - 1;
+  callback(newPage);
 }
 
 function scrollToTop() {
@@ -66,13 +53,12 @@ function scrollToTop() {
 }
 
 function updateButtonState(button, isDisabled) {
-  if (isDisabled) {    
+  if (isDisabled) {
     button.setAttribute('disabled', 'true');
-    button.classList.add('disabled')
+    button.classList.add('disabled');
   } else {
     button.removeAttribute('disabled');
     button.classList.remove('disabled');
   }
 }
-
 export { renderPagination };
