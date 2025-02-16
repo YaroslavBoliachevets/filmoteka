@@ -1,17 +1,13 @@
 .movies-section {
-  // display: flex;
   position: relative;
-  // justify-content: center;
 }
 
 .genres {
   padding: 20px 8px;
   z-index: 2;
-  // position: fixed;
 }
 
 .open-genres {
-  // ==============================
   background-color: rgba(91, 91, 91, 0.536);
   color: rgb(255, 255, 255);
 
@@ -19,7 +15,7 @@
     background-color: grey;
     color: rgb(255, 255, 255);
   }
-  // =====================
+
 
   text-transform: uppercase;
   padding: 10px;
@@ -99,6 +95,7 @@
   width: 100%;
   margin: 0 auto;
   margin-bottom: 20px;
+  height: 440px;
 
   @media (max-width: 319px) {
     max-width: 250px;
@@ -106,6 +103,7 @@
 
   @media (min-width: 768px) {
     max-width: 336px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
   }
 
   @media (min-width: 1024px) {
@@ -113,18 +111,17 @@
     margin-bottom: 35px;
 
     transition: transform linear 300ms;
-
     &:hover,
     &:focus {
       transform: scale(1.03);
-      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+      
     }
   }
 }
 
 .movie-img {
-  width: 100%;
-  // max-width: 280px;
+  height: 350px;
+  margin: auto;
   border-radius: 5px;
 
   @media (max-width: 319px) {
@@ -132,13 +129,13 @@
   }
 
   @media (min-width: 768px) {
-    max-width: 336px;
-    min-height: 574px;
+    // max-width: 336px;
+    // min-height: 574px;
   }
 
   @media (min-width: 1024px) {
-    max-width: 395px;
-    max-height: 592px;
+    // max-width: 395px;
+    // max-height: 592px;
   }
 }
 
