@@ -31,6 +31,8 @@ genreList.addEventListener('click', (e) => {
 genresBtn.addEventListener('click', switchGenresBtn);
 
 function switchGenresBtn() {
+  console.log('click btn', );
+  
   genreFilter();
   const genreList = getElementBySelector('.genre-list');
   genreList.classList.toggle('open');

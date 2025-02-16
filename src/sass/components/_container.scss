@@ -3,18 +3,20 @@
   box-sizing: border-box;
 
   margin: 0 auto;
-  padding: 40px 20px;
+  // padding: 40px 20px;
 
-  @media (min-width:321px) and (max-width:767px) {
-    max-width: 320px;
-  }
+  // @media (min-width:321px) and (max-width:767px) {
+  //   max-width: 320px;
+  // }
 
   @media (min-width:768px) {
     max-width: 704px;
+    // padding: 0;
   }
   
   @media (min-width:1024px) {
     max-width: 1250px;
+    // padding: 0;
   }
 
   &--bg {
