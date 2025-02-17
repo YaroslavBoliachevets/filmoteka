@@ -6,6 +6,19 @@
 body {
   font-family: 'Roboto', 'Arial', sans-serif;
   font-weight: 500;
+
+  background: -webkit-linear-gradient(
+    180deg,
+    #ffffff,
+    #c7c7c7,
+    #404040
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    180deg,
+    #ffffff,
+    #c7c7c7,
+    #404040
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 ::-webkit-scrollbar,
@@ -13,13 +26,12 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #1d180eb4 #1d180eb4;
 
-  // background: #f1f1f1; /* Цвет трека скроллбара */
   border-radius: 10px;
 }
 
 .modal-body::-webkit-scrollbar-thumb {
-  background: #df3232; /* Цвет "ползунка" */
-  border-radius: 10px; /* Закругленные углы */
+  background: #df3232;
+  border-radius: 10px;
 }
 
 body::-webkit-scrollbar-thumb:hover,
@@ -40,20 +52,19 @@ p {
   font-weight: 500;
   font-size: 12px;
 
-  @media (min-width:1024px) {
+  @media (min-width: 1024px) {
     font-size: 20px;
   }
 }
 
 button {
-
   font-weight: 600;
-	border-radius: 5px;
-	width: 100px;
-	background-color: var(--accent);
-	color: var(--btn-color);
-	border: 0px;
-	padding: 10px 15px;
+  border-radius: 5px;
+  width: 100px;
+  background-color: var(--accent);
+  color: var(--btn-color);
+  border: 0px;
+  padding: 10px 15px;
   cursor: pointer;
 
   &:hover {
@@ -63,13 +74,14 @@ button {
     transition: color 300ms linear;
   }
 
-  &.disabled{
+  &.disabled {
     background-color: rgb(247 178 99);
     color: #292929;
   }
 
-  &.disabled :hover, &.disabled :focus {
+  &.disabled :hover,
+  &.disabled :focus {
     background-color: rgb(247 178 99);
-    color: #292929; 
+    color: #292929;
   }
 }

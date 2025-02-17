@@ -1,5 +1,20 @@
 .movies-section {
   position: relative;
+
+    // background: -webkit-linear-gradient(180deg, #ffffff,#c7c7c7,#000000);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(180deg, #ffffff,#c7c7c7,#000000);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+}
+
+.scretch {
+  @media (min-width: 1024px) {
+    position: fixed;
+    top: 110px;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: url(/src/img/320/prank.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
 
 .genres {
@@ -15,7 +30,6 @@
     background-color: grey;
     color: rgb(255, 255, 255);
   }
-
 
   text-transform: uppercase;
   padding: 10px;
@@ -48,13 +62,13 @@
     left: -140px;
   }
 
-  @media (min-width:768px) {
+  @media (min-width: 768px) {
     column-count: 5;
     top: 75px;
     left: -242px;
   }
 
-  @media (min-width:1024px) {
+  @media (min-width: 1024px) {
     column-count: 7;
     top: 75px;
     left: -242px;
@@ -114,7 +128,6 @@
     &:hover,
     &:focus {
       transform: scale(1.03);
-      
     }
   }
 }

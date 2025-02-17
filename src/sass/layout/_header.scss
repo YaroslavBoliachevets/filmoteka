@@ -73,7 +73,7 @@
     padding: 5px;
     background-color: transparent;
     border: 0px;
-    border: 1px solid rgba(128, 128, 128, 0.536);
+    border: 1px solid var(--second);
     position: relative;
 
     color: rgb(160, 158, 158);
@@ -89,7 +89,7 @@
     }
 
     &::placeholder {
-      color: rgba(128, 128, 128, 0.536);
+      color: var(--second);
       font-style: italic;
       font-size: 14px;
     }
@@ -99,19 +99,10 @@
     }
   }
 
-  &-input--svg {
-    fill: red;
-    position: relative;
-    width: 10px;
-    height: 10px;
-    top: -14px;
-    left: 270px;
-  }
-
   &-button {
     width: 70px;
     text-transform: capitalize;
-    background-color: rgba(128, 128, 128, 0.536);
+    background-color: var(--second);
     border: 0px;
     cursor: pointer;
     color: rgb(182, 180, 180);
@@ -119,11 +110,14 @@
 
     &:hover {
       background-color: grey;
-      color: rgb(239, 239, 239);
+      color: var(--header);
     }
   }
 }
 
 .warning {
-  color: red;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  color: var(--header);
 }
